@@ -2,7 +2,7 @@
 
 ## Overview
 
-TeeDesign Studio is a full-stack e-commerce application that allows customers to browse and purchase T-shirts while offering a built-in design studio for creating custom designs. The platform includes an admin panel for product and order management, user authentication, shopping cart functionality, and a comprehensive wishlist system.
+TeeDesign Studio is a full-stack e-commerce application that allows customers to browse and purchase T-shirts while offering a built-in design studio for creating custom designs. The platform includes comprehensive user and admin functionality with features like product catalog, custom design tools, shopping cart, order management, and user authentication. The application supports both customer-facing features (browsing, designing, purchasing) and administrative features (product management, order tracking, user management).
 
 ## User Preferences
 
@@ -14,72 +14,60 @@ Preferred communication style: Simple, everyday language.
 - **Framework**: React 18 with TypeScript using Vite for fast development and building
 - **Routing**: Wouter for client-side routing with protected routes for authenticated users
 - **State Management**: TanStack React Query for server state management and caching
-- **UI Framework**: Radix UI components with shadcn/ui design system
-- **Styling**: Tailwind CSS with custom CSS variables for theming
-- **Forms**: React Hook Form with Zod validation for type-safe form handling
+- **UI Framework**: Radix UI components with shadcn/ui design system providing accessible, customizable components
+- **Styling**: Tailwind CSS with custom CSS variables for theming and responsive design
+- **Forms**: React Hook Form with Zod validation for type-safe form handling and client-side validation
+- **Design Tools**: Custom canvas implementation for T-shirt design studio (prepared for Fabric.js integration)
 
 ### Backend Architecture
-- **Runtime**: Node.js with Express.js framework
-- **Language**: TypeScript with ES modules
-- **Authentication**: Passport.js with local strategy using session-based auth
-- **Session Storage**: PostgreSQL-backed sessions using connect-pg-simple
-- **Password Security**: Node.js crypto module with scrypt for password hashing
+- **Runtime**: Node.js with Express.js framework using ES modules
+- **Language**: TypeScript with strict type checking throughout the application
+- **Authentication**: Passport.js with local strategy using session-based authentication
+- **Session Storage**: PostgreSQL-backed sessions using connect-pg-simple for scalable session management
+- **Password Security**: Node.js crypto module with scrypt for secure password hashing with salt
+- **API Design**: RESTful API endpoints with proper error handling and validation
 
 ### Data Storage Solutions
 - **Database**: PostgreSQL with Drizzle ORM for type-safe database operations
 - **Schema Design**: Comprehensive relational schema including:
-  - Users with role-based access (customer/admin)
-  - Products with categories, colors, sizes, and stock management
-  - Custom designs with JSON storage for canvas data
-  - Shopping cart and wishlist functionality
-  - Orders with detailed item tracking
-- **Connection**: Neon serverless PostgreSQL with connection pooling
+  - Users with role-based access control (customer/admin)
+  - Products with categories, colors, sizes, and inventory management
+  - Custom designs with JSON storage for canvas data and user association
+  - Shopping cart and wishlist functionality with product relationships
+  - Orders with detailed order items tracking and status management
+  - Reviews and ratings system for products
+- **Migrations**: Drizzle Kit for database schema migrations and management
+- **Connection Pooling**: PostgreSQL connection pooling for efficient database connections
 
 ### Authentication and Authorization
-- **Strategy**: Session-based authentication with Passport.js local strategy
-- **Security**: Scrypt-based password hashing with salt for secure storage
-- **Session Management**: PostgreSQL session store for scalable session handling
-- **Role-based Access**: Admin and customer roles with protected routes
-- **CSRF Protection**: Built into session configuration
+- **Strategy**: Session-based authentication with Passport.js local strategy for secure user management
+- **Password Security**: Scrypt-based password hashing with unique salt for each password
+- **Session Management**: PostgreSQL session store for scalable and persistent session handling
+- **Role-based Access**: Differentiated access between customer and admin roles with route protection
+- **Protected Routes**: Frontend route protection ensuring authenticated access to sensitive areas
 
-### External Dependencies
+## External Dependencies
 
-#### Core Framework Dependencies
-- **@neondatabase/serverless**: Serverless PostgreSQL database connection
-- **drizzle-orm**: Type-safe ORM with PostgreSQL dialect
-- **express**: Web application framework for Node.js
-- **passport**: Authentication middleware with local strategy
+### Core Framework Dependencies
+- **PostgreSQL Database**: Primary data storage using connection string from DATABASE_URL environment variable
+- **Drizzle ORM**: Type-safe database operations with PostgreSQL dialect and schema management
+- **Express.js**: Web application framework for Node.js providing API endpoints and middleware
+- **React Query**: Server state management and caching for efficient data fetching
+- **Passport.js**: Authentication middleware with local strategy support
 
-#### Frontend UI Dependencies
-- **@radix-ui/***: Complete primitive component library for accessible UI
-- **@tanstack/react-query**: Server state management and caching
-- **react-hook-form**: Performant forms with easy validation
-- **@hookform/resolvers**: Zod resolver for form validation
-- **tailwindcss**: Utility-first CSS framework
+### UI and Styling Dependencies
+- **Radix UI**: Comprehensive set of low-level UI primitives for building accessible design systems
+- **Tailwind CSS**: Utility-first CSS framework with custom theming and responsive design
+- **Shadcn/ui**: Pre-built component library based on Radix UI with consistent design patterns
+- **Lucide React**: Icon library providing consistent iconography throughout the application
 
-#### Development and Build Tools
-- **vite**: Fast build tool and development server
-- **typescript**: Static type checking
-- **esbuild**: Fast JavaScript bundler for production builds
-- **tsx**: TypeScript execution engine for development
+### Development and Build Tools
+- **Vite**: Fast development server and build tool with TypeScript support
+- **TypeScript**: Static type checking for both frontend and backend code
+- **ESBuild**: Fast JavaScript bundler for production builds
+- **PostCSS**: CSS processing with Tailwind CSS and Autoprefixer plugins
 
-#### Authentication and Session Management
-- **express-session**: Session middleware for Express
-- **connect-pg-simple**: PostgreSQL session store
-- **passport-local**: Username/password authentication strategy
-
-The architecture follows a clear separation between client and server with shared TypeScript schemas, ensuring type safety across the full stack. The design supports both ready-made product purchases and custom design creation through an integrated canvas-based design studio.
-
-## Recent Changes
-
-### September 22, 2025 - Replit Environment Setup
-- Successfully imported GitHub repository and configured for Replit environment
-- Installed Node.js 20 toolchain with all required dependencies (594 packages)
-- Configured PostgreSQL database with proper environment variables (DATABASE_URL and related secrets)
-- Initialized database schema using Drizzle ORM with `npm run db:push`
-- Verified application runs correctly on port 5000 with proper host configuration
-- Confirmed Vite development server configured with `allowedHosts: true` for Replit proxy
-- Set up development workflow "TshirtDesigner" for continuous development
-- Configured deployment settings for production with autoscale target using npm build and start scripts
-- Application fully functional in Replit environment with all API endpoints working
-- Frontend and backend integrated successfully with proper CORS and proxy handling
+### Validation and Forms
+- **Zod**: Schema validation library for runtime type checking and form validation
+- **React Hook Form**: Performant form library with minimal re-renders and validation integration
+- **Drizzle-Zod**: Integration between Drizzle ORM and Zod for database schema validation
